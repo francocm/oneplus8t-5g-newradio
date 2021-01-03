@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<policy name        = "generic"
+        changelist  = "$Change: 11335228 $"
+        schema_ver  = "1"
+        policy_ver  = "16.23.6"
+>
+
+  <initial>
+    <mcc_list name="home_mcc"> 234 235 </mcc_list>
+    <mcc_list name="india_mccs"> 404 405 406 </mcc_list>
+    <mcc_list name="america_mccs"> 310 311 312 313 314 315 316 </mcc_list>
+    <mcc_list name="china_hk_macao_mccs"> 460 454 455 </mcc_list>
+    <mcc_list name="europe_mccs"> 202 204 206 208 212 212 213 214 216 218 219 220 222 226 228 230 231 232 234 235 238 240 242 244 246 247 248 255 257 259 260 262 266 268 270 272 274 276 278 280 284 286 288 292 293 294 295 297 </mcc_list>
+    <mcc_list name="test_sim_mccs"> 001 </mcc_list>
+
+    <plmn_list name="home_plmn"> 234-10 </plmn_list>
+    <plmn_list name="test_sim_plmns"> 460-99 001-01 001-12</plmn_list>
+    <plmn_list name = "america_att_plmns"> 310-30 310-70 310-90 310-150 310-170 310-280 310-380 310-410 310-560 310-680 310-980 311-180 </plmn_list>
+    <plmn_list name = "china_cmcc_plmns"> 460-00 460-02 460-04 460-07 460-08 </plmn_list>
+
+    <define_fullrat_config>
+      <actions>
+        <ue_mode> CSFB </ue_mode>
+        <rat_capability base="none"> <include> C H G W L 5G </include> </rat_capability>
+        <rf_bands base="hardware"/>
+        <svc_mode> ALL </svc_mode>
+        <freq_list list="default" />
+      </actions>
+    </define_fullrat_config>
+
+    <rf_band_list name="rf_bands_default">
+      <gw_bands base="hardware" />
+      <lte_bands base="hardware" />
+      <tds_bands base="hardware" />
+      <nr5g_sa_bands base="hardware" />
+      <nr5g_nsa_bands base="hardware" />
+    </rf_band_list>
+
+    <rf_band_list name="EU_others_bands">
+      <gw_bands base="hardware" />
+      <lte_bands base="none"> <include> 0 2 6 7 19 27 31 37 39 45 </include> </lte_bands>
+      <tds_bands base="none" />
+    </rf_band_list>
+
+    <rf_band_list name="EU_UK_bands">
+      <gw_bands base="hardware" />
+      <lte_bands base="none"> <include> 0 2 6 7 19 27 31 37 39 41 45 </include> </lte_bands>
+      <nr5g_sa_bands base="none" />
+      <nr5g_nsa_bands base="none"> <include> 77 </include> </nr5g_nsa_bands>
+      <tds_bands base="none" />
+    </rf_band_list>
+
+    <rf_band_list name="china_hk_macao_bands">
+      <gw_bands base="hardware" />
+      <lte_bands base="hardware" />
+      <tds_bands base="hardware" />
+    </rf_band_list>
+
+    <rf_band_list name="global_others_bands">
+      <gw_bands base="hardware" />
+      <lte_bands base="hardware" />
+      <tds_bands base="none" />
+    </rf_band_list>
+
+    <rat_capability_if base="none" > <include> G W L 5G </include> </rat_capability_if>
+    <ue_mode_if> CSFB </ue_mode_if>
+    <rf_bands_if list="rf_bands_home" />
+    <feature single_sim="normal"> dualmmode </feature>
+  </initial>
+
+  <if precond="none">
+    <any_of>
+      <not> <have_location /> </not>
+      <not> <phone_operating_mode> ONLINE </phone_operating_mode> </not>
+    </any_of>
+    <then>
+      <stop />
+    </then>
+  </if>
+
+  <svc_mode> FULL </svc_mode>
+  <rat_order> L W T G C H 5G</rat_order> 
+
+  <select>
+    <case>
+      <all_of>
+        <location_mcc_in list="europe_mccs" />
+        <not><imsi_mcc_in list="test_sim_mccs" /></not>
+        <not><imsi_plmn_in list="test_sim_plmns" /></not>
+      </all_of>
+      <actions>
+        <rat_capability base="none"> <include> G W L </include> </rat_capability>
+        <rat_order> L W G </rat_order>
+        <rf_bands list="EU_others_bands" />
+        <ue_mode> CSFB </ue_mode>
+        <ca_band_combos string="3A4A-1A4-mAll;3A4-1A4A-mAll;3A4A-1A4A-mAll;7A4A-1A4-mAll;7A4-1A4A-mAll;7A4A-1A4A-mAll;20A2A-1A4-mAll;20A2-1A4A-mAll;32A2-1A4A-mAll;7A4A-3A4-mAll;7A4-3A4A-mAll;20A2A-3A4-mAll;20A2-3A4A-mAll;20A2A-3A4A-mAll;32A2-3A4A-mAll;38A2A-3A4-mAll;38A2-3A4A-mAll;38A4A-3A2-mAll;38A4-3A2A-mAll;20A2A-7A4-mAll;20A2-7A4A-mAll;20A2A-7A4A-mAll;32A2-7A4A-mAll;38A2A-7A4-mAll;38A2-7A4A-mAll;38A4A-7A2-mAll;38A4-7A2A-mAll;32A2-20A2A-mAll;38A4A-20A2-mAll;38A4-20A2A-mAll;3C44A-mAll;3C44C-mAll;7C44A-mAll;7C44C-mAll;38C44A-mAll;38C44C-mAll;3C44A-1A4-mAll;3C44-1A4A-mAll;3C44C-1A4-mAll;7C44A-1A4-mAll;7C44-1A4A-mAll;7C44C-1A4-mAll;7A4A-3A4-1A4-mAll;7A4-3A4A-1A4-mAll;7A4-3A4-1A4A-mAll;7A4-3A4A-1A4A-mAll;7A4A-3A4-1A4A-mAll;7A4A-3A4A-1A4-mAll;20A2A-3A4-1A4-mAll;20A2-3A4A-1A4-mAll;20A2-3A4-1A4A-mAll;20A2A-3A4A-1A4-mAll;20A2A-7A4-1A4-mAll;20A2-7A4A-1A4-mAll;20A2-7A4-1A4A-mAll;20A2A-7A4A-1A4-mAll;7C44A-3A4-mAll;7C44-3A4A-mAll;7C44C-3A4-mAll;7A4A-3C44-mAll;7A4-3C44A-mAll;7A4-3C44C-mAll;7A2A-3A4-3A4-mAll;7A2-3A4A-3A4-mAll;7A4A-3A4-3A2-mAll;7A4-3A4A-3A2-mAll;7A4-3A4-3A2A-mAll;8A2A-3A4-3A4-mAll;8A2-3A4A-3A4-mAll;8A2A-7A4-3A4-mAll;8A2-7A4A-3A4-mAll;8A2-7A4-3A4A-mAll;20A2A-7A4-3A4-mAll;20A2-7A4A-3A4-mAll;20A2-7A4-3A4A-mAll;20A2A-7A4-3A4A-mAll;20A2A-7A4A-3A4-mAll;38A2A-7A4-3A4-mAll;38A2-7A4A-3A4-mAll;38A2-7A4-3A4A-mAll;38A2A-20A2-7A4-mAll;38A2-20A2A-7A4-mAll;38A2-20A2-7A4A-mAll;38A4A-20A2-7A2-mAll;38A4-20A2A-7A2-mAll;38A4-20A2-7A2A-mAll;38A2-20A2A-7A4A-mAll;38A4-20A2A-7A2A-mAll;" />
+        <if>
+            <cond> <serving_plmn_in list = "home_plmn" /> </cond>
+            <then>
+                <rat_capability base="none"> <include> G W L 5G</include> </rat_capability>
+                <rat_order> 5G L W G </rat_order>
+            </then>
+        </if>
+        <if>
+            <cond> <location_mcc_in list="home_mcc" /> </cond>
+            <then>
+                <rf_bands list="EU_UK_bands" />
+                <ca_band_combos string="3A4A-1A4-mAll;3A4-1A4A-mAll;3A4A-1A4A-mAll;7A4A-1A4-mAll;7A4-1A4A-mAll;7A4A-1A4A-mAll;20A2A-1A4-mAll;20A2-1A4A-mAll;32A2-1A4A-mAll;7A4A-3A4-mAll;7A4-3A4A-mAll;7A4A-3A4A-mAll;20A2A-3A4-mAll;20A2-3A4A-mAll;20A2A-3A4A-mAll;32A2-3A4A-mAll;40A2A-3A4-mAll;40A2-3A4A-mAll;40A4A-3A2-mAll;40A4-3A4A-mAll;20A2A-7A4-mAll;20A2-7A4A-mAll;20A2A-7A4A-mAll;32A2-7A4A-mAll;32A2-20A2A-mAll;40A2A-40A2-mAll;3C44A-mAll;3C44C-mAll;7C44A-mAll;7C44C-mAll;40C22A-mAll;40C22C-mAll;3C44A-1A4-mAll;3C44-1A4A-mAll;3C44C-1A4-mAll;7A4A-3A4-1A4-mAll;7A4-3A4A-1A4-mAll;7A4-3A4-1A4A-mAll;7A4-3A4A-1A4A-mAll;7A4A-3A4-1A4A-mAll;7A4A-3A4A-1A4-mAll;20A2A-3A4-1A4-mAll;20A2-3A4A-1A4-mAll;20A2-3A4-1A4A-mAll;20A2A-3A4A-1A4-mAll;32A2-3A4A-1A4-mAll;32A2-3A4-1A4A-mAll;7C44A-1A4-mAll;7C44-1A4A-mAll;7C44C-1A4-mAll;20A2A-7A4-1A4-mAll;20A2-7A4A-1A4-mAll;20A2-7A4-1A4A-mAll;20A2A-7A4A-1A4-mAll;32A2-20A2A-1A4-mAll;32A2-20A2-1A4A-mAll;7C44A-3A4-mAll;7C44-3A4A-mAll;7C44C-3A4-mAll;7A4A-3C44-mAll;7A4-3C44A-mAll;7A4-3C44C-mAll;20A2A-3C44-mAll;20A2-3C44A-mAll;20A2A-7A4-3A4-mAll;20A2-7A4A-3A4-mAll;20A2-7A4-3A4A-mAll;20A2A-7A4-3A4A-mAll;20A2A-7A4A-3A4-mAll;32A2-20A2A-3A4-mAll;32A2-20A2-3A4A-mAll;32A2-20A2A-3A4A-mAll;32A2-20A2A-7A4-mAll;32A2-20A2-7A4A-mAll;32A2-20A2A-7A4A-mAll;7C44A-3C44-mAll;7C44-3C44A-mAll;7C44-3C44C-mAll;7C44C-3C44-mAll;7C44A-3A4-1A4-mAll;7C44-3A4A-1A4-mAll;7C44-3A4-1A4A-mAll;7C44C-3A4-1A4-mAll;7A4A-3C44-1A4-mAll;7A4-3C44A-1A4-mAll;7A4-3C44-1A4A-mAll;7A4-3C44C-1A4-mAll;20A2A-7A4-3A4-1A4-mAll;20A2-7A4A-3A4-1A4-mAll;20A2-7A4-3A4A-1A4-mAll;20A2-7A4-3A4-1A4A-mAll;20A2A-7A4-3A4A-1A4-mAll;20A2A-7A4A-3A4-1A4-mAll;32A2-20A2A-3A4-1A4-mAll;32A2-20A2-3A4A-1A4-mAll;32A2-20A2-3A4-1A4A-mAll;32A2-20A2A-3A4A-1A4-mAll;32A2-20A2A-7A4-1A4-mAll;32A2-20A2-7A4A-1A4-mAll;32A2-20A2-7A4-1A4A-mAll;32A2-20A2A-7A4A-1A4-mAll;7C44A-3C44-1A4-mAll;7C44-3C44A-1A4-mAll;7C44-3C44-1A4A-mAll;7C44-3C44C-1A4-mAll;7C44C-3C44-1A4-mAll;" />
+            </then>
+        </if>
+      </actions>
+    </case>
+
+    <case>
+     <all_of>
+      <location_mcc_in list="america_mccs" />
+      <not><imsi_mcc_in list="test_sim_mccs" /></not>
+      <not><imsi_plmn_in list="test_sim_plmns" /></not>
+     </all_of>
+     <actions>
+      <rat_capability base="none"> <include> G W L C H </include> </rat_capability>
+      <rf_bands list="global_others_bands" />
+      <ue_mode> 1X_CSFB_PREF </ue_mode>
+      <rat_order> L C H W G </rat_order>
+      <if>
+        <cond> <serving_plmn_in list = "america_att_plmns" /> </cond>
+      <then>
+        <ca_band_combos string="5A2A-2A2-mAll;5A2-2A2A-mAll;4A2A-4A2-mAll;5A2A-4A2-mAll;5A2-4A2A-mAll;41A4A-41A4-mAll;41C44A-mAll;46A2-2A2A-mAll;46A2-4A2A-mAll;5A2A-4A2-4A2-mAll;5A2-4A2A-4A2-mAll;41C44A-41A4-mAll;41C44-41A4A-mAll;41D444A-mAll;46C22-2A2A-mAll;46C22-4A2A-mAll;" /> 
+      </then>
+      <else>
+        <ca_band_combos string="3A4A-1A4-mAll;3A4-1A4A-mAll;7A2A-1A2-mAll;7A2-1A2A-mAll;20A2A-1A4-mAll;20A2-1A4A-mAll;2A2A-2A2-mAll;5A2A-3A4-mAll;5A2-3A4A-mAll;7A2A-3A2-mAll;7A2-3A2A-mAll;8A2A-3A4-mAll;8A2-3A4A-mAll;20A2A-3A4-mAll;20A2-3A4A-mAll;40A2A-3A2-mAll;40A2-3A2A-mAll;4A2A-4A2-mAll;40A4A-5A2-mAll;40A4-5A2A-mAll;8A2A-7A2-mAll;8A2-7A2A-mAll;20A2A-7A2-mAll;20A2-7A2A-mAll;40A2A-7A2-mAll;40A2-7A2A-mAll;2C22A-mAll;3C44A-mAll;7C22A-mAll;38C22A-mAll;40C44A-mAll;41C44A-mAll;5A2A-3A4-1A4-mAll;5A2-3A4A-1A4-mAll;5A2-3A4-1A4A-mAll;7A2A-3A2-1A2-mAll;7A2-3A2A-1A2-mAll;7A2-3A2-1A2A-mAll;8A2A-3A4-1A4-mAll;8A2-3A4A-1A4-mAll;8A2-3A4-1A4A-mAll;20A2A-3A4-1A4-mAll;20A2-3A4A-1A4-mAll;20A2-3A4-1A4A-mAll;20A2A-7A2-1A2-mAll;20A2-7A2A-1A2-mAll;20A2-7A2-1A2A-mAll;7C22A-3A2-mAll;7C22-3A2A-mAll;7A2A-3C22-mAll;7A2-3C22A-mAll;20A2A-3C44-mAll;20A2-3C44A-mAll;40C22A-3A2-mAll;40C22-3A2A-mAll;7A2A-3A2-3A2-mAll;7A2-3A2A-3A2-mAll;8A2A-3A4-3A4-mAll;8A2-3A4A-3A4-mAll;8A2A-7A2-3A2-mAll;8A2-7A2A-3A2-mAll;8A2-7A2-3A2A-mAll;20A2A-7A2-3A2-mAll;20A2-7A2A-3A2-mAll;20A2-7A2-3A2A-mAll;40C22A-7A2-mAll;40C22-7A2A-mAll;3C44C-mAll;7C22C-mAll;40C44C-mAll;41C44C-mAll;7C22C-3A2-mAll;7A2-3C22C-mAll;20A2-3C44C-mAll;" />
+      </else>
+      </if>
+      </actions>
+    </case>
+
+    <case>
+      <all_of>
+        <location_mcc_in list="china_hk_macao_mccs" />
+        <not><imsi_mcc_in list="test_sim_mccs" /></not>
+        <not><imsi_plmn_in list="test_sim_plmns" /></not>
+      </all_of>
+      <actions>
+        <rat_capability base="none"> <include> G W L </include> </rat_capability>
+        <rf_bands list="china_hk_macao_bands" />
+        <ue_mode> CSFB </ue_mode>
+        <rat_order> L W G </rat_order>
+        <if>
+          <cond> <serving_plmn_in list="china_cmcc_plmns" /> </cond>
+        <then>
+          <rat_capability base="none"> <include> G T L </include> </rat_capability>
+          <rat_order> L T G </rat_order>
+        </then>
+        </if>
+        <ca_band_combos string="4A2A-4A2-mAll;12A2A-4A2-mAll;12A2-4A2A-mAll;7A2A-4A2-mAll;7A2-4A2A-mAll;7A2A-7A2-mAll;12A2A-7A2-mAll;12A2-7A2A-mAll;46A2-2A2A-mAll;46A2-4A2A-mAll;7A2A-4A2-4A2-mAll;7A2-4A2A-4A2-mAll;7A2A-7A2-4A2-mAll;7A2-7A2-4A2A-mAll;12A2A-7A2-4A2-mAll;12A2-7A2A-4A2-mAll;12A2-7A2-4A2A-mAll;46C22-2A2A-mAll;46C22-4A2A-mAll;" />
+      </actions>
+    </case>
+
+    <case>
+      <all_of>
+        <have_location />
+        <not><imsi_mcc_in list="test_sim_mccs" /></not>
+        <not><imsi_plmn_in list="test_sim_plmns" /></not>
+      </all_of>
+      <actions>
+        <rat_capability base="none"> <include> G W L </include> </rat_capability>
+        <rf_bands list="global_others_bands" />
+        <ue_mode> CSFB </ue_mode> 
+        <rat_order> L W G </rat_order>
+        <ca_band_combos string="3A4A-1A4-mAll;3A4-1A4A-mAll;7A4A-1A4-mAll;7A4-1A4A-mAll;20A2A-1A4-mAll;20A2-1A4A-mAll;28A2A-1A4-mAll;28A2-1A4A-mAll;2A2A-2A2-mAll;4A2A-2A2-mAll;4A2-2A2A-mAll;5A2A-3A4-mAll;5A2-3A4A-mAll;7A4A-3A4-mAll;7A4-3A4A-mAll;8A2A-3A4-mAll;8A2-3A4A-mAll;20A2A-3A4-mAll;20A2-3A4A-mAll;20A2A-3A4A-mAll;28A2A-3A4-mAll;28A2-3A4A-mAll;28A2A-3A4A-mAll;38A2A-3A4-mAll;38A2-3A4A-mAll;38A4A-3A2-mAll;38A4-3A2A-mAll;40A2A-3A4-mAll;40A2-3A4A-mAll;4A2A-4A2-mAll;28A2A-4A2-mAll;28A2-4A2A-mAll;40A2A-5A2-mAll;40A2-5A2A-mAll;8A2A-7A4-mAll;8A2-7A4A-mAll;20A2A-7A4-mAll;20A2-7A4A-mAll;20A2A-7A4A-mAll;28A2A-7A4-mAll;28A2-7A4A-mAll;28A2A-7A4A-mAll;40A2A-7A4-mAll;40A2-7A4A-mAll;2C22A-mAll;3C44A-mAll;3C44C-mAll;7C44A-mAll;7C44C-mAll;38C44A-mAll;38C44C-mAll;40C22A-mAll;40C22C-mAll;41C44A-mAll;41C44C-mAll;12A2A-4A2-mAll;12A2-4A2A-mAll;7A4A-2A2-mAll;7A4-2A2A-mAll;7A4A-4A2-mAll;7A4-4A2A-mAll;7A4A-7A4-mAll;12A2A-7A4-mAll;12A2-7A4A-mAll;46A2-2A2A-mAll;46A2-4A2A-mAll;66A2A-46A2-mAll;5A2A-3A4-1A4-mAll;5A2-3A4A-1A4-mAll;5A2-3A4-1A4A-mAll;7A4A-3A4-1A4-mAll;7A4-3A4A-1A4-mAll;7A4-3A4-1A4A-mAll;8A2A-3A4-1A4-mAll;8A2-3A4A-1A4-mAll;8A2-3A4-1A4A-mAll;20A2A-3A4-1A4-mAll;20A2-3A4A-1A4-mAll;20A2-3A4-1A4A-mAll;20A2A-3A4A-1A4-mAll;28A2A-3A4-1A4-mAll;28A2-3A4A-1A4-mAll;28A2-3A4-1A4A-mAll;28A2A-3A4A-1A4-mAll;20A2A-7A4-1A4-mAll;20A2-7A4A-1A4-mAll;20A2-7A4-1A4A-mAll;20A2A-7A4A-1A4-mAll;7C44A-3A4-mAll;7C44-3A4A-mAll;7C44C-3A4-mAll;7A4A-3C44-mAll;7A4-3C4A-mAll;7A4-3C44C-mAll;20A2A-3C44-mAll;20A2-3C44A-mAll;20A2-3C44C-mAll;40C22A-3A4-mAll;40C22-3A4A-mAll;7A2A-3A4-3A4-mAll;7A2-3A4A-3A4-mAll;7A4A-3A4-3A2-mAll;7A4-3A4A-3A2-mAll;7A4-3A4-3A2A-mAll;8A2A-3A4-3A4-mAll;8A2-3A4A-3A4-mAll;8A2A-7A4-3A4-mAll;8A2-7A4A-3A4-mAll;8A2-7A4-3A4A-mAll;20A2A-7A4-3A4-mAll;20A2-7A4A-3A4-mAll;20A2-7A4-3A4A-mAll;20A2A-7A4-3A4A-mAll;20A2A-7A4A-3A4-mAll;28A2A-7A4-3A4-mAll;28A2-7A4A-3A4-mAll;28A2-7A4-3A4A-mAll;28A2A-7A4-3A4A-mAll;28A2A-7A4A-3A4-mAll;38A2A-7A4-3A4-mAll;38A2-7A4A-3A4-mAll;38A2-7A4-3A4A-mAll;38A4A-7A4-3A2-mAll;38A4-7A4A-3A2-mAll;38A4-7A4-3A2A-mAll;40C22A-7A4-mAll;40C22-7A4A-mAll;7A4A-4A2-2A2-mAll;7A4-4A2A-2A2-mAll;7A4-4A2-2A2A-mAll;7A4A-7A2-2A2-mAll;7A4-7A2A-2A2-mAll;7A4-7A2-2A2A-mAll;7A4A-4A2-4A2-mAll;7A4-4A2-4A2A-mAll;7A4A-7A2-4A2-mAll;7A4-7A2A-4A2-mAll;7A4-7A2-4A2A-mAll;12A2A-7A4-4A2-mAll;12A2-7A4A-4A2-mAll;12A2-7A4-4A2A-mAll;46C22-2A2A-mAll;46C22-4A2A-mAll;66A2A-46C22-mAll;" />
+        <if>
+          <cond> <location_mcc_in list="india_mccs" /> </cond>
+        <then>
+          <ca_band_combos string="3A4A-1A4-mAll;3A4-1A4A-mAll;8A2A-1A4-mAll;8A2-1A4A-mAll;40A2A-1A2-mAll;40A2-1A2A-mAll;3A4A-3A4-mAll;8A2A-3A4-mAll;8A2-3A4A-mAll;40A2A-3A2-mAll;40A2-3A2A-mAll;5A2A-3A4-mAll;5A2-3A4A-mAll;41A4A-3A4-mAll;41A4-3A4A-mAll;5A2A-5A2-mAll;40A4A-5A2-mAll;40A4-5A2A-mAll;40A4A-8A2-mAll;40A4-8A2A-mAll;40A4A-40A4-mAll;46A2-1A4A-mAll;46A2-3A4A-mAll;3C44A-mAll;5C22A-mAll;40C44A-mAll;41C44A-mAll;40C22A-1A2-mAll;40C22-1A2A-mAll;40C22A-3A2-mAll;40C22-3A2A-mAll;8A2A-3A4-1A4-mAll;8A2-3A4A-1A4-mAll;8A2-3A4-1A4A-mAll;40A2A-3A2-1A2-mAll;40A2-3A2A-1A2-mAll;40A2-3A2-1A2A-mAll;40A2A-8A2-1A2-mAll;40A2-8A2A-1A2-mAll;40A2-8A2-1A2A-mAll;40A2A-5A2-3A2-mAll;40A2-5A2A-3A2-mAll;40A2-5A2-3A2A-mAll;40A2A-8A2-3A2-mAll;40A2-8A2A-3A2-mAll;40A2-8A2-3A2A-mAll;40C44A-8A2-mAll;40C44-8A2A-mAll;46C22-1A4A-mAll;46C22-3A4A-mAll;40C22A-3A2-1A2-mAll;40C22-3A2A-1A2-mAll;40C22-3A2-1A2A-mAll;40C22A-8A2-1A2-mAll;40C22-8A2A-1A2-mAll;40C22-8A2-1A2A-mAll;40C22A-8A2-3A2-mAll;40C22-8A2A-3A2-mAll;40C22-8A2-3A2A-mAll;46D222-3A4A-mAll;40A2A-8A2-3A2-1A2-mAll;40A2-8A2A-3A2-1A2-mAll;40A2-8A2-3A2A-1A2-mAll;40A2-8A2-3A2-1A2A-mAll;3C44C-mAll;40C44C-mAll;41C44C-mAll;40C22C-1A2-mAll;40C44C-8A2-mAll;40C22C-3A2-1A2-mAll;40C22C-8A2-1A2-mAll;40C22C-8A2-3A2-mAll;" />
+        </then>
+        </if>
+      </actions>
+    </case>
+
+    <case>
+      <any_of>
+        <imsi_mcc_in list="test_sim_mccs" />
+        <imsi_plmn_in list="test_sim_plmns" />
+      </any_of>
+      <actions>
+        <rat_capability base="none"> <include> G W L C H T 5G </include> </rat_capability>
+        <svc_mode> FULL </svc_mode>
+        <ue_mode> 1X_CSFB_PREF </ue_mode>
+        <rf_bands base="hardware" />
+      </actions>
+    </case>
+    
+  </select>
+</policy>
