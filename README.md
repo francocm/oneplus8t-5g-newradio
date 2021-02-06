@@ -14,7 +14,7 @@ Whilst the steps (not files) presented there are compatible with the OnePlus 8T,
 * The provided files had no effect on the OnePlus 8T, at least in the UK
 * The provided files are severely outdated in terms of base
     * Based on OnePlus 7 / early 8 series
-    * Based on XML version `16.11.21`, whereas this is based on the one provided in the EU stable OP8T firmware (`Oxygen OS 11.0.6.8.KB05BA` - 29 December 2020): `16.23.6` / `16.29.8`
+    * Based on XML version `16.11.21`, whereas this is based on the one provided in the EU stable OP8T firmware (`Oxygen OS 11.0.6.9.KB05BA` - 29 December 2020): `16.23.6` / `16.29.8`
 
 ## Usage
 
@@ -29,12 +29,15 @@ Follow the same instructions as indicated in [the original thread](https://forum
 
 ## Implementation
 
-This change solves the problem by enabling NR 5G **always** in the EU/UK region. The rationale  here is that:
+This change solves the problem by enabling NR 5G **always** in the EU/UK region. The rationale here is that:
 * NR band 78 is allowed throughout the EU/UK space
+* Both `NSA` *(Non-Standalone Architecture)* and `SA` *(Standalone Architecture)* are enabled - availability depends on availability by your operator and coverage in the area you are in
 * The lack of support should be dependant on the operator offering it and not the phone deciding it - if there is no operator on a particular band, the phone will simply just not connect to it and fallback to other radios (LTE, WCDMA, etc), making it transparent to the user anyway
 * The EU/UK region definition is as pre-defined already in the original policy files, under `europe_mccs`.
 
 The philosophy here is: *a phone should not wait until its manufacturer puts the respective operator on the allow list for 5G to work. Instead, it should dynamically work based on available implementations in the user's context*.
+
+A comparison diff between the OnePlus original implementation and the mod, can be found [here](https://github.com/francocm/oneplus8t-5g-newradio/compare/rev_0003...rev_0004).
 
 ## Additional Info
 
@@ -53,7 +56,7 @@ The philosophy here is: *a phone should not wait until its manufacturer puts the
 
 ### Additional points
 
-* The initial commit contains the files as provided in the original firmware, without any modifications. Refer to [CHANGELOG.md](CHANGELOG.md) for changes that were applied onto it.
+* Some commits contain the files as provided in the original firmware, without any modifications. Refer to [CHANGELOG.md](CHANGELOG.md) for changes to map the correct revision with `OP8T_ORIGINAL` / `MOD` and pick the file from the appropriate tag. The `main` branch should always have the latest `MOD` version.
 * The related file [.version.json](.version.json) describes the files at that particular commit, and the revision number within it is aligned with [CHANGELOG.md](CHANGELOG.md). The possible values for `type` are:
     * `OP8T_ORIGINAL` - As extracted from the stock OnePlus 8T modem partition
     * `MOD` - Modified version
