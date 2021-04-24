@@ -42,7 +42,7 @@ This change solves the problem by enabling NR 5G **always** in the EU/UK region.
 
 The philosophy here is: *a phone should not wait until its manufacturer puts the respective operator on the allow list for 5G to work. Instead, it should dynamically work based on available implementations in the user's context*.
 
-A comparison diff between the OnePlus original implementation and the mod, can be found [here](https://github.com/francocm/oneplus8t-5g-newradio/compare/rev_0005...rev_0006).
+A comparison diff between the OnePlus original implementation and the mod, can be found [here](https://github.com/francocm/oneplus8t-5g-newradio/compare/rev_0007...rev_0008).
 
 ## Additional Info
 
