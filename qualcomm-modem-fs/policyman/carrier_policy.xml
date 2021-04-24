@@ -46,7 +46,7 @@
     <rf_band_list name="EU_UK_bands">
       <gw_bands base="hardware" />
       <lte_bands base="none"> <include> 0 2 6 7 19 27 31 37 39 41 45 </include> </lte_bands>
-      <nr5g_sa_bands base="none"> <include> 77 </include> </nr5g_sa_bands>
+      <nr5g_sa_bands base="none" />
       <nr5g_nsa_bands base="none"> <include> 77 </include> </nr5g_nsa_bands>
       <tds_bands base="none" />
     </rf_band_list>
@@ -80,7 +80,7 @@
   </if>
 
   <svc_mode> FULL </svc_mode>
-  <rat_order> L W T G C H 5G </rat_order> 
+  <rat_order> L W T G C H 5G</rat_order> 
 
   <select>
     <case>
@@ -90,15 +90,15 @@
         <not><imsi_plmn_in list="test_sim_plmns" /></not>
       </all_of>
       <actions>
-        <rat_capability base="none"> <include> G W L 5G </include> </rat_capability>
-        <rat_order> 5G L W G </rat_order>
+        <rat_capability base="none"> <include> G W L </include> </rat_capability>
+        <rat_order> L W G </rat_order>
         <rf_bands list="EU_others_bands" />
         <ue_mode> CSFB </ue_mode>
         <ca_band_combos string="3A4A-1A4-mAll;3A4-1A4A-mAll;3A4A-1A4A-mAll;7A4A-1A4-mAll;7A4-1A4A-mAll;7A4A-1A4A-mAll;20A2A-1A4-mAll;20A2-1A4A-mAll;32A2-1A4A-mAll;7A4A-3A4-mAll;7A4-3A4A-mAll;20A2A-3A4-mAll;20A2-3A4A-mAll;20A2A-3A4A-mAll;32A2-3A4A-mAll;38A2A-3A4-mAll;38A2-3A4A-mAll;38A4A-3A2-mAll;38A4-3A2A-mAll;20A2A-7A4-mAll;20A2-7A4A-mAll;20A2A-7A4A-mAll;32A2-7A4A-mAll;38A2A-7A4-mAll;38A2-7A4A-mAll;38A4A-7A2-mAll;38A4-7A2A-mAll;32A2-20A2A-mAll;38A4A-20A2-mAll;38A4-20A2A-mAll;3C44A-mAll;3C44C-mAll;7C44A-mAll;7C44C-mAll;38C44A-mAll;38C44C-mAll;3C44A-1A4-mAll;3C44-1A4A-mAll;3C44C-1A4-mAll;7C44A-1A4-mAll;7C44-1A4A-mAll;7C44C-1A4-mAll;7A4A-3A4-1A4-mAll;7A4-3A4A-1A4-mAll;7A4-3A4-1A4A-mAll;7A4-3A4A-1A4A-mAll;7A4A-3A4-1A4A-mAll;7A4A-3A4A-1A4-mAll;20A2A-3A4-1A4-mAll;20A2-3A4A-1A4-mAll;20A2-3A4-1A4A-mAll;20A2A-3A4A-1A4-mAll;20A2A-7A4-1A4-mAll;20A2-7A4A-1A4-mAll;20A2-7A4-1A4A-mAll;20A2A-7A4A-1A4-mAll;7C44A-3A4-mAll;7C44-3A4A-mAll;7C44C-3A4-mAll;7A4A-3C44-mAll;7A4-3C44A-mAll;7A4-3C44C-mAll;7A2A-3A4-3A4-mAll;7A2-3A4A-3A4-mAll;7A4A-3A4-3A2-mAll;7A4-3A4A-3A2-mAll;7A4-3A4-3A2A-mAll;8A2A-3A4-3A4-mAll;8A2-3A4A-3A4-mAll;8A2A-7A4-3A4-mAll;8A2-7A4A-3A4-mAll;8A2-7A4-3A4A-mAll;20A2A-7A4-3A4-mAll;20A2-7A4A-3A4-mAll;20A2-7A4-3A4A-mAll;20A2A-7A4-3A4A-mAll;20A2A-7A4A-3A4-mAll;38A2A-7A4-3A4-mAll;38A2-7A4A-3A4-mAll;38A2-7A4-3A4A-mAll;38A2A-20A2-7A4-mAll;38A2-20A2A-7A4-mAll;38A2-20A2-7A4A-mAll;38A4A-20A2-7A2-mAll;38A4-20A2A-7A2-mAll;38A4-20A2-7A2A-mAll;38A2-20A2A-7A4A-mAll;38A4-20A2A-7A2A-mAll;" />
         <if>
             <cond> <serving_plmn_in list = "home_plmn" /> </cond>
             <then>
-                <rat_capability base="none"> <include> G W L 5G </include> </rat_capability>
+                <rat_capability base="none"> <include> G W L 5G</include> </rat_capability>
                 <rat_order> 5G L W G </rat_order>
             </then>
         </if>

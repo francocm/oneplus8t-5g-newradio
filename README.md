@@ -14,7 +14,7 @@ Whilst the steps (not files) presented there are compatible with the OnePlus 8T,
 * The provided files had no effect on the OnePlus 8T, at least in the UK
 * The provided files are severely outdated in terms of base
     * Based on OnePlus 7 / early 8 series
-    * Based on XML version `16.11.21`, whereas this is based on the one provided in the EU stable OP8T firmware (`Oxygen OS 11.0.7.10.KB05BA` - February 2021): `16.23.6` / `16.29.8`
+    * Based on XML version `16.11.21`, whereas this is based on the one provided in the EU stable OP8T firmware (`Oxygen OS 11.0.8.12.KB05BA` - April 2021): `16.23.6` / `16.29.10`
 
 ## Usage
 
@@ -22,6 +22,11 @@ Follow the same instructions as indicated in [the original thread](https://forum
 
 * [/policyman/carrier_policy.xml](qualcomm-modem-fs/policyman/carrier_policy.xml)
 * [/policyman/carrier_policy.xml_Subscription01](qualcomm-modem-fs/policyman/carrier_policy.xml_Subscription01)
+
+### Shortcut Cheat-sheet
+
+* Enabling engineering mode: "dial" `*#801#` _(this requires the installation of the [OnePlus Engineering Mode APK](https://www.apkmirror.com/apk/oneplus-ltd/engineermode/engineermode-v1-01-0-171117173719-25c8842-release/engineermode-v1-01-0-171117173719-25c8842-android-apk-download/) first)_
+* Modifying radio settings: "dial" `*#*#4636#*#*`
 
 ### Extra steps
 
