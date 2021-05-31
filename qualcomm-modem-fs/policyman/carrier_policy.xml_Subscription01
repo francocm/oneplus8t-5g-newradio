@@ -393,7 +393,7 @@ $Header: //components/rel/mmcp.mpss/8.0/policyman/configurations/Carrier/OEM/No_
         <not><imsi_plmn_in list="test_sim_plmns" /></not>
       </all_of>
       <actions>
-        <rat_capability base="none"> <include> G W L 5G </include> </rat_capability>
+        <rat_capability base="none"> <include> G W L </include> </rat_capability>
         <ue_mode> CSFB </ue_mode>
         <rat_order> L W G </rat_order>
         <rf_bands list="EU_others_bands" />

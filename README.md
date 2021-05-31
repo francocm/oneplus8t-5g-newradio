@@ -14,7 +14,7 @@ Whilst the steps (not files) presented there are compatible with the OnePlus 8T,
 * The provided files had no effect on the OnePlus 8T, at least in the UK
 * The provided files are severely outdated in terms of base
     * Based on OnePlus 7 / early 8 series
-    * Based on XML version `16.11.21`, whereas this is based on the one provided in the EU stable OP8T firmware (`Oxygen OS 11.0.8.12.KB05BA` - April 2021): `16.23.6` / `16.29.10`
+    * Based on XML version `16.11.21`, whereas this is based on the one provided in the EU stable OP8T firmware (`Oxygen OS 11.0.8.13.KB05BA` - May 2021): `16.23.6` / `16.29.10`
 
 ## Usage
 
@@ -42,7 +42,7 @@ This change solves the problem by enabling NR 5G **always** in the EU/UK region.
 
 The philosophy here is: *a phone should not wait until its manufacturer puts the respective operator on the allow list for 5G to work. Instead, it should dynamically work based on available implementations in the user's context*.
 
-A comparison diff between the OnePlus original implementation and the mod, can be found [here](https://github.com/francocm/oneplus8t-5g-newradio/compare/rev_0007...rev_0008).
+A comparison diff between the OnePlus original implementation and the mod, can be found [here](https://github.com/francocm/oneplus8t-5g-newradio/compare/rev_0009...rev_0010).
 
 ## Additional Info
 
