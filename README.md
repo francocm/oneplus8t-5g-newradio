@@ -14,7 +14,7 @@ Whilst the steps (not files) presented there are compatible with the OnePlus 8T,
 * The provided files had no effect on the OnePlus 8T, at least in the UK
 * The provided files are severely outdated in terms of base
     * Based on OnePlus 7 / early 8 series
-    * Based on XML version `16.11.21`, whereas this is based on the one provided in the EU stable OP8T firmware (`Oxygen OS 11.0.8.13.KB05BA` - May 2021): `16.23.6` / `16.29.10`
+    * Based on XML version `16.11.21`, whereas this is based on the one provided in the EU stable OP8T firmware (`Oxygen OS 11.0.9.9.KB05BA` - August 2021): `16.23.6` / `16.29.11`
 
 ## Usage
 
