@@ -24,9 +24,9 @@ $Header: //components/rel/mmcp.mpss/8.0/policyman/configurations/Carrier/OEM/No_
 <!-- [update policy_ver to 16.28.10][2020/01/06][goli.nagarjuna][OPN-708] Enabling 5G NSA Support for vietnam operators -->
 
 <policy name        = "generic"
-        changelist  = "$Change: 11335232 $"
+        changelist  = "$Change: 11335233 $"
         schema_ver  = "1"
-        policy_ver  = "16.29.10"
+        policy_ver  = "16.29.11"
 >
 
   <initial>
@@ -103,6 +103,9 @@ $Header: //components/rel/mmcp.mpss/8.0/policyman/configurations/Carrier/OEM/No_
         272-05
       </plmn_list>
 
+      <!-- 5G PLMN for Iliad Italy operator -->
+      <plmn_list name="iliad_it_plmn"> 222-50 </plmn_list>
+
       <plmn_list name = "Vietnam_5G_plmn">
         452-04 452-01 452-02
       </plmn_list>
@@ -141,6 +144,15 @@ $Header: //components/rel/mmcp.mpss/8.0/policyman/configurations/Carrier/OEM/No_
         <tds_bands base="none" />
         <nr5g_sa_bands base="none"/>
         <nr5g_nsa_bands base="none" > <include> 2 77 </include> </nr5g_nsa_bands>
+      </rf_band_list>
+
+      <!-- 5G bands for Iliad operator -->
+      <rf_band_list name="iliad_it_bands">
+        <gw_bands base="hardware" />
+        <lte_bands base="none"> <include> 0 2 6 27 </include> </lte_bands>  <!-- LTE Band: 1/3/7/28 -->
+        <tds_bands base="none" />
+        <nr5g_sa_bands base="none" />
+        <nr5g_nsa_bands base="none"> <include> 27 77 </include> </nr5g_nsa_bands>
       </rf_band_list>
 
 <!-- End [OPCR#000367] -->
@@ -403,6 +415,14 @@ $Header: //components/rel/mmcp.mpss/8.0/policyman/configurations/Carrier/OEM/No_
                 <rat_capability base="none"> <include> G W L 5G </include> </rat_capability>
                 <rat_order> 5G L W G </rat_order>
              </then>
+        </if>
+        <if>
+            <cond> <serving_plmn_in list="iliad_it_plmn" /> </cond>
+            <then>
+                <rf_bands list="iliad_it_bands" />
+                <rat_capability base="none"> <include> G W L 5G </include> </rat_capability>
+                <rat_order> 5G L W G </rat_order>
+            </then>
         </if>
         <ca_band_combos string="3A4A-1A4-mAll;3A4-1A4A-mAll;3A4A-1A4A-mAll;7A4A-1A4-mAll;7A4-1A4A-mAll;7A4A-1A4A-mAll;20A2A-1A4-mAll;20A2-1A4A-mAll;32A2-1A4A-mAll;7A4A-3A4-mAll;7A4-3A4A-mAll;20A2A-3A4-mAll;20A2-3A4A-mAll;20A2A-3A4A-mAll;32A2-3A4A-mAll;38A2A-3A4-mAll;38A2-3A4A-mAll;38A4A-3A2-mAll;38A4-3A2A-mAll;20A2A-7A4-mAll;20A2-7A4A-mAll;20A2A-7A4A-mAll;32A2-7A4A-mAll;38A2A-7A4-mAll;38A2-7A4A-mAll;38A4A-7A2-mAll;38A4-7A2A-mAll;32A2-20A2A-mAll;38A4A-20A2-mAll;38A4-20A2A-mAll;3C44A-mAll;3C44C-mAll;7C44A-mAll;7C44C-mAll;38C44A-mAll;38C44C-mAll;3C44A-1A4-mAll;3C44-1A4A-mAll;3C44C-1A4-mAll;7C44A-1A4-mAll;7C44-1A4A-mAll;7C44C-1A4-mAll;7A4A-3A4-1A4-mAll;7A4-3A4A-1A4-mAll;7A4-3A4-1A4A-mAll;7A4-3A4A-1A4A-mAll;7A4A-3A4-1A4A-mAll;7A4A-3A4A-1A4-mAll;20A2A-3A4-1A4-mAll;20A2-3A4A-1A4-mAll;20A2-3A4-1A4A-mAll;20A2A-3A4A-1A4-mAll;20A2A-7A4-1A4-mAll;20A2-7A4A-1A4-mAll;20A2-7A4-1A4A-mAll;20A2A-7A4A-1A4-mAll;7C44A-3A4-mAll;7C44-3A4A-mAll;7C44C-3A4-mAll;7A4A-3C44-mAll;7A4-3C44A-mAll;7A4-3C44C-mAll;7A2A-3A4-3A4-mAll;7A2-3A4A-3A4-mAll;7A4A-3A4-3A2-mAll;7A4-3A4A-3A2-mAll;7A4-3A4-3A2A-mAll;8A2A-3A4-3A4-mAll;8A2-3A4A-3A4-mAll;8A2A-7A4-3A4-mAll;8A2-7A4A-3A4-mAll;8A2-7A4-3A4A-mAll;20A2A-7A4-3A4-mAll;20A2-7A4A-3A4-mAll;20A2-7A4-3A4A-mAll;20A2A-7A4-3A4A-mAll;20A2A-7A4A-3A4-mAll;38A2A-7A4-3A4-mAll;38A2-7A4A-3A4-mAll;38A2-7A4-3A4A-mAll;38A2A-20A2-7A4-mAll;38A2-20A2A-7A4-mAll;38A2-20A2-7A4A-mAll;38A4A-20A2-7A2-mAll;38A4-20A2A-7A2-mAll;38A4-20A2-7A2A-mAll;38A2-20A2A-7A4A-mAll;38A4-20A2A-7A2A-mAll;" />
       </actions>
