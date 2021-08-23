@@ -6,6 +6,7 @@ Make sure you are on the latest commit on the `main` branch to see the most up t
 
 ## Changes
 
+* **rev_0012** - `2021-08-18` - `MOD` - Reapplied mod to enable 5G NR on band n78 in EU/UK region. These changes / mod is applied on top of the latest changes by OnePlus provided in **rev_0011** so any latest changes by OnePlus are inherited here as well.
 * **rev_0011** - `2021-08-18` - `OP8T_ORIGINAL` - Resynced original carrier policy files as originated from the `Oxygen OS 11.0.9.9.KB05BA` OTA released in August 2021. The main difference between this version and the previous original change in **rev_0009** is that OnePlus have added official support for 5G for the Italian operator `Iliad` (`222-50`) on bands n28 and n78 NSA.
 * **rev_0010** - `2021-05-30` - `MOD` - Reapplied mod to enable 5G NR on band n78 in EU/UK region. Since **rev_0009** did not introduce changes from OnePlus, and since no additional mods were required compared to the previous mod, this revision is identical to **rev_0008**.
 * **rev_0009** - `2021-05-30` - `OP8T_ORIGINAL` - Resynced original carrier policy files as originated from the `Oxygen OS 11.0.8.13.KB05BA` OTA released in May 2021. It is worth noting that these are identical to **rev_0007**, meaning OnePlus has not made any changes since the latest stable build. This revision is created for versioning reasons only.
