@@ -143,8 +143,8 @@ $Header: //components/rel/mmcp.mpss/8.0/policyman/configurations/Carrier/OEM/No_
         <gw_bands base="hardware" />
         <lte_bands base="none"> <include> 0 2 6 7 19 27 31 37 39 45 </include> </lte_bands> <!-- the 10 LTE Band: 1/3/7/8/20/28/32/38/40/46 -->
         <tds_bands base="none" />
-        <nr5g_sa_bands base="none"/>
-        <nr5g_nsa_bands base="none" > <include> 2 77 </include> </nr5g_nsa_bands>
+        <nr5g_sa_bands base="none" > <include> 0 2 27 39 77 </include> </nr5g_sa_bands>
+        <nr5g_nsa_bands base="none" > <include> 0 2 27 39 77 </include> </nr5g_nsa_bands>
       </rf_band_list>
 
       <!-- 5G bands for Iliad operator -->
@@ -152,8 +152,8 @@ $Header: //components/rel/mmcp.mpss/8.0/policyman/configurations/Carrier/OEM/No_
         <gw_bands base="hardware" />
         <lte_bands base="none"> <include> 0 2 6 27 </include> </lte_bands>  <!-- LTE Band: 1/3/7/28 -->
         <tds_bands base="none" />
-        <nr5g_sa_bands base="none" />
-        <nr5g_nsa_bands base="none"> <include> 27 77 </include> </nr5g_nsa_bands>
+        <nr5g_sa_bands base="none"> <include> 0 2 27 39 77 </include> </nr5g_sa_bands>
+        <nr5g_nsa_bands base="none"> <include> 0 2 27 39 77 </include> </nr5g_nsa_bands>
       </rf_band_list>
 
 <!-- End [OPCR#000367] -->
@@ -406,7 +406,7 @@ $Header: //components/rel/mmcp.mpss/8.0/policyman/configurations/Carrier/OEM/No_
         <not><imsi_plmn_in list="test_sim_plmns" /></not>
       </all_of>
       <actions>
-        <rat_capability base="none"> <include> G W L </include> </rat_capability>
+        <rat_capability base="none"> <include> G W L 5G </include> </rat_capability>
         <ue_mode> CSFB </ue_mode>
         <rat_order> L W G </rat_order>
         <rf_bands list="EU_others_bands" />

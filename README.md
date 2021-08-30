@@ -35,14 +35,14 @@ Follow the same instructions as indicated in [the original thread](https://forum
 ## Implementation
 
 This change solves the problem by enabling NR 5G **always** in the EU/UK region. The rationale here is that:
-* NR band 78 is allowed throughout the EU/UK space
+* NR bands 1, 3, 28, 40 and 78 are allowed throughout the EU/UK space
 * Both `NSA` *(Non-Standalone Architecture)* and `SA` *(Standalone Architecture)* are enabled - availability depends on availability by your operator and coverage in the area you are in
-* The lack of support should be dependant on the operator offering it and not the phone deciding it - if there is no operator on a particular band, the phone will simply just not connect to it and fallback to other radios (LTE, WCDMA, etc), making it transparent to the user anyway
+* The lack of support should be dependant on the operator offering it and not the phone deciding it - if there is no operator on a particular band, the phone will simply just not connect to it and fallback to other radios (LTE, WCDMA, etc) and radio modes (NSA / SA), making it transparent to the user anyway
 * The EU/UK region definition is as pre-defined already in the original policy files, under `europe_mccs`.
 
-The philosophy here is: *a phone should not wait until its manufacturer puts the respective operator on the allow list for 5G to work. Instead, it should dynamically work based on available implementations in the user's context*.
+The philosophy here is: *a phone should not wait until its manufacturer puts the respective operator on the allow list for 5G to work. Instead, it should dynamically work based on available implementations in the user's environment*.
 
-A comparison diff between the OnePlus original implementation and the mod, can be found [here](https://github.com/francocm/oneplus8t-5g-newradio/compare/rev_0011...rev_0012).
+A comparison diff between the OnePlus original implementation and the mod, can be found [here](https://github.com/francocm/oneplus8t-5g-newradio/compare/rev_0013...rev_0014).
 
 ## Additional Info
 
@@ -57,7 +57,11 @@ A comparison diff between the OnePlus original implementation and the mod, can b
 
 > **Note**: The `carrier_policy.xml*` files start the band count from 0 not 1. As an example, band 78 is listed as 77 in the XML files.
 
-* n78
+* n1 _(untested)_
+* n3 _(untested)_
+* n28 _(untested)_
+* n40 _(untested)_
+* n78 _(tested on O2 UK)_
 
 ### Additional points
 
