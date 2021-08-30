@@ -22,11 +22,12 @@ $Header: //components/rel/mmcp.mpss/8.0/policyman/configurations/Carrier/OEM/No_
 <!-- [update policy_ver to 16.29.8][2020/11/03][vijay.pulluri][IKR-45025] Enable 5G for H3G Ireland(272-05)-->
 <!-- [update policy_ver to 16.29.9][2020/12/16][satish.singh][IKR-30717] Enable 5G for Viettle-->
 <!-- [update policy_ver to 16.28.10][2020/01/06][goli.nagarjuna][OPN-708] Enabling 5G NSA Support for vietnam operators -->
+<!-- [update policy_ver to 16.28.11][2021/07/08][g.goud][IKR-60670] RAT acq order issue fix for H3G Ireland and Europe MCCs -->
 
 <policy name        = "generic"
         changelist  = "$Change: 11335233 $"
         schema_ver  = "1"
-        policy_ver  = "16.29.11"
+        policy_ver  = "16.29.12"
 >
 
   <initial>
@@ -100,7 +101,7 @@ $Header: //components/rel/mmcp.mpss/8.0/policyman/configurations/Carrier/OEM/No_
       </plmn_list>
 
       <plmn_list name = "H3G_Ireland_plmns">
-        272-05
+        272-05 272-02
       </plmn_list>
 
       <!-- 5G PLMN for Iliad Italy operator -->
@@ -405,7 +406,7 @@ $Header: //components/rel/mmcp.mpss/8.0/policyman/configurations/Carrier/OEM/No_
         <not><imsi_plmn_in list="test_sim_plmns" /></not>
       </all_of>
       <actions>
-        <rat_capability base="none"> <include> G W L 5G </include> </rat_capability>
+        <rat_capability base="none"> <include> G W L </include> </rat_capability>
         <ue_mode> CSFB </ue_mode>
         <rat_order> L W G </rat_order>
         <rf_bands list="EU_others_bands" />
