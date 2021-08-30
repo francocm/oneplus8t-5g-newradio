@@ -22,11 +22,12 @@ $Header: //components/rel/mmcp.mpss/8.0/policyman/configurations/Carrier/OEM/No_
 <!-- [update policy_ver to 16.29.8][2020/11/03][vijay.pulluri][IKR-45025] Enable 5G for H3G Ireland(272-05)-->
 <!-- [update policy_ver to 16.29.9][2020/12/16][satish.singh][IKR-30717] Enable 5G for Viettle-->
 <!-- [update policy_ver to 16.28.10][2020/01/06][goli.nagarjuna][OPN-708] Enabling 5G NSA Support for vietnam operators -->
+<!-- [update policy_ver to 16.28.11][2021/07/08][g.goud][IKR-60670] RAT acq order issue fix for H3G Ireland and Europe MCCs -->
 
 <policy name        = "generic"
         changelist  = "$Change: 11335233 $"
         schema_ver  = "1"
-        policy_ver  = "16.29.11"
+        policy_ver  = "16.29.12"
 >
 
   <initial>
@@ -100,7 +101,7 @@ $Header: //components/rel/mmcp.mpss/8.0/policyman/configurations/Carrier/OEM/No_
       </plmn_list>
 
       <plmn_list name = "H3G_Ireland_plmns">
-        272-05
+        272-05 272-02
       </plmn_list>
 
       <!-- 5G PLMN for Iliad Italy operator -->
@@ -142,8 +143,8 @@ $Header: //components/rel/mmcp.mpss/8.0/policyman/configurations/Carrier/OEM/No_
         <gw_bands base="hardware" />
         <lte_bands base="none"> <include> 0 2 6 7 19 27 31 37 39 45 </include> </lte_bands> <!-- the 10 LTE Band: 1/3/7/8/20/28/32/38/40/46 -->
         <tds_bands base="none" />
-        <nr5g_sa_bands base="none"/>
-        <nr5g_nsa_bands base="none" > <include> 2 77 </include> </nr5g_nsa_bands>
+        <nr5g_sa_bands base="none" > <include> 0 2 27 39 77 </include> </nr5g_sa_bands>
+        <nr5g_nsa_bands base="none" > <include> 0 2 27 39 77 </include> </nr5g_nsa_bands>
       </rf_band_list>
 
       <!-- 5G bands for Iliad operator -->
@@ -151,8 +152,8 @@ $Header: //components/rel/mmcp.mpss/8.0/policyman/configurations/Carrier/OEM/No_
         <gw_bands base="hardware" />
         <lte_bands base="none"> <include> 0 2 6 27 </include> </lte_bands>  <!-- LTE Band: 1/3/7/28 -->
         <tds_bands base="none" />
-        <nr5g_sa_bands base="none" />
-        <nr5g_nsa_bands base="none"> <include> 27 77 </include> </nr5g_nsa_bands>
+        <nr5g_sa_bands base="none"> <include> 0 2 27 39 77 </include> </nr5g_sa_bands>
+        <nr5g_nsa_bands base="none"> <include> 0 2 27 39 77 </include> </nr5g_nsa_bands>
       </rf_band_list>
 
 <!-- End [OPCR#000367] -->

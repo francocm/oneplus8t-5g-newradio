@@ -46,8 +46,8 @@
     <rf_band_list name="EU_UK_bands">
       <gw_bands base="hardware" />
       <lte_bands base="none"> <include> 0 2 6 7 19 27 31 37 39 41 45 </include> </lte_bands>
-      <nr5g_sa_bands base="none"> <include> 77 </include> </nr5g_sa_bands>
-      <nr5g_nsa_bands base="none"> <include> 77 </include> </nr5g_nsa_bands>
+      <nr5g_sa_bands base="none"> <include> 0 2 27 39 77 </include> </nr5g_sa_bands>
+      <nr5g_nsa_bands base="none"> <include> 0 2 27 39 77 </include> </nr5g_nsa_bands>
       <tds_bands base="none" />
     </rf_band_list>
 
